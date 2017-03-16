@@ -15,53 +15,50 @@ Step 1 - In the Terminal
 
             type 'sudo npm install -g protractor'
 
-Step 2 - In the same Terminal window,
-    Run this command - webdriver-manager update
-        This is will download the latest version of selenium server automatically.
+Step 2 - Create a test new folder you can name it anything, inside
 
-Step 3 - Now we have to start the server, So run the following command
-
-        webdriver-manager start
-
-        Ensure no errors..
-
-Step 4 - Create a test new folder you can name it anything, inside
-
-    A)   Make a file called - todo-spec.js
+    A)   Make a file called - test.js
            Inside the file copy and paste the following
 
            ```javascript
-           describe('angularjs homepage todo list', function() {
-              it('should add a todo', function() {
-                browser.get('https://angularjs.org');
+           describe("Go to the Homepage ", function(){
+   browser.ignoreSynchronization=true; // This allows to protractor to run on regular website, not specific to angular 
+   
+  it("Go to the Home page ", function(){
+    browser.get("http://ornaitjewels.com/"); // Go to a specific URL
+    console.log("Home Page Open succesffully") // Log a message
+  });
+   
+    // From the Home Page go to the  Pendant Page 
+  it("Go to Pendants Page ", function(){
+    var pendants = element(by.css("#tm_menu > div > ul > li:nth-child(2) > a")); // set a variable for action
+    pendants.click(); // Click on element
+   // browser.sleep(1000) // Tell Protractor to Wait for 5000 miliseconds or 5 seconds
+    console.log("From the Home Page go to the Pendant Page "); 
+    element(by.css("#content > div:nth-child(2) > div:nth-child(1) > div.product-thumb.transition.options > div.caption > div >  a")).click(); // Go the element and Click
+    // browser.sleep(1000)
+    console.log("Go to a specific Product Page");
+   // browser.sleep(1000)
+    browser.navigate().back(); // Tell the browser to go back 
+  });
 
-                element(by.model('todoList.todoText')).sendKeys('write first protractor test');
-                element(by.css('[value="add"]')).click();
-
-                var todoList = element.all(by.repeater('todo in todoList.todos'));
-                expect(todoList.count()).toEqual(3);
-                expect(todoList.get(2).getText()).toEqual('write first protractor test');
-
-                // You wrote your first test, cross it off the list
-                todoList.get(2).element(by.css('input')).click();
-                var completedAmount = element.all(by.css('.done-true'));
-                expect(completedAmount.count()).toEqual(2);
-              });
-            });
+});
           ```
 
     B)    Make a new file called - conf.js
 
-           Copy and paste the following
-           ```javascript
-               exports.config = {
-              seleniumAddress: 'http://localhost:4444/wd/hub',
-              specs: ['todo-spec.js']
-            };
-            ```
+```javascript
+           exports.config = {
+    directConnect: true,
+    capabilities:{
+        'browserName': 'chrome'},
+    framework: 'jasmine2',
+    specs: ['test.js']
+};
+```
 
-Step 5 -  Now open a new terminal
-          >  Navigate to directory you created. cd/newtestdir
+Step 3 -  Now open a new terminal
+          >  Navigate to directory you created. cd DemoTest
           >  which should have two file you just created todo-spec.js and conf.js
           > now just run command  protractor conf.js
 
