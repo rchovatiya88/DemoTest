@@ -17,7 +17,7 @@ Steps to get Protractor working on MAC, windows should be same.
 
 2. - Create a test new folder you can name it anything, inside
 
-   ⋅⋅A)  Make a file called - test.js
+   A)  Make a file called - test.js
            Inside the file copy and paste the following
            
             describe("Go to the Homepage ", function(){
@@ -41,7 +41,7 @@ Steps to get Protractor working on MAC, windows should be same.
             });
           });
    
-   ⋅⋅B) Make a new file called - conf.js
+   B) Make a new file called - conf.js
        Inside the file copy and paste the following
        
            exports.config = {
