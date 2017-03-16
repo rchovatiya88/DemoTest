@@ -7,7 +7,7 @@
 Steps to get Protractor working on MAC, windows should be same.
 
 
-Step 1 - In the Terminal
+1. - In the Terminal
 
     Run this command - npm install -g protractor
 
@@ -15,15 +15,12 @@ Step 1 - In the Terminal
 
             type 'sudo npm install -g protractor'
 
-Step 2 - Create a test new folder you can name it anything, inside
+2. - Create a test new folder you can name it anything, inside
 
-    A)   Make a file called - test.js
+   ⋅⋅A)  Make a file called - test.js
            Inside the file copy and paste the following
-
-           ```javascript
-
+           
             describe("Go to the Homepage ", function(){
-            
             browser.ignoreSynchronization=true; // This allows to protractor to run on regular website, not specific to angular 
             it("Go to the Home page ", function(){
             browser.get("http://ornaitjewels.com/"); // Go to a specific URL
@@ -36,18 +33,17 @@ Step 2 - Create a test new folder you can name it anything, inside
             pendants.click(); // Click on element
             browser.sleep(1000) // Tell Protractor to Wait for 1000 miliseconds or 1sec
             console.log("From the Home Page go to the Pendant Page "); 
-            element(by.css("#content > div:nth-child(2) > div:nth-child(1) > div.product-thumb.transition.options > div.caption > div >  a")).click(); // Go the element and Click
+            element(by.css("#content > div:nth-child(2) > div:nth-child(1) > div.product-thumb.transition.options > div.caption > div >                 a")).click(); // Go the element and Click
             // browser.sleep(1000)
             console.log("Go to a specific Product Page");
             // browser.sleep(1000)
             browser.navigate().back(); // Tell the browser to go back 
             });
           });
-          ```
-
-    B)    Make a new file called - conf.js
-
-        ```javascript
+   
+   ⋅⋅B) Make a new file called - conf.js
+       Inside the file copy and paste the following
+       
            exports.config = {
           directConnect: true,
           capabilities:{
@@ -55,9 +51,9 @@ Step 2 - Create a test new folder you can name it anything, inside
           framework: 'jasmine2',
           specs: ['test.js']
           };
-        ```
+        
 
-Step 3 -  Now open a new terminal
+3. -  Now open a new terminal
           >  Navigate to directory you created. cd DemoTest
           >  which should have two file you just created todo-spec.js and conf.js
           > now just run command  protractor conf.js
